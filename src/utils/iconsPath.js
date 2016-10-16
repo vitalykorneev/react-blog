@@ -1,0 +1,1 @@
+export default (path) => `babel!svg-react!../../svg/${path}?name=Icon`

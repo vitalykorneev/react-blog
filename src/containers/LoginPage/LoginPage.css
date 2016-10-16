@@ -1,0 +1,66 @@
+.loginPage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: $gray1;
+}
+
+.title {
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 112px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.wrap {
+  margin: auto;
+  padding-left: 112px;
+}
+
+.card {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.siLogo {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -23px;
+  width: calc(50% - 195px);
+  text-align: center;
+
+  & svg {
+    position: relative;
+    display: inline-block;
+    left: -5%;
+  }
+}
+
+.siText {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -9px;
+  width: calc(50% - 195px);
+  text-align: center;
+
+  & svg {
+    position: relative;
+    display: inline-block;
+    left: 5%;
+  }
+}
+
+.info {
+  position: absolute;
+  width: 100%;
+  bottom: 26px;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
