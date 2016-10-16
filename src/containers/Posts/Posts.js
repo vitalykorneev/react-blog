@@ -4,14 +4,17 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import CSSModules from 'react-css-modules'
 import styles from './Posts.css'
+import { PostActions } from '../../actions'
 
 import { 
   AdminPanel, 
-  // PostsList 
+  PostsList 
 } from '../../components'
 
 @connect(state => ({
-  data: state.auth
+  posts: state.posts
+}), dispatch => ({
+  postActions: bindActionCreators(PostActions, dispatch)
 }))
 
 @CSSModules(styles, {allowMultiple: true})
@@ -22,13 +25,21 @@ export default class Posts extends Component {
   constructor(props, context) {
     super(props, context)
   }
+
+  componentWillMount() {
+    this.props.postActions.getPosts()
+  }
+
   render() {
-    const { data, dispatch } = this.props
+    const { posts } = this.props
 
     return (
       <div styleName='root'>
         <AdminPanel 
           current='0'
+        />
+        <PostsList
+          posts={posts.posts}
         />
       </div>
     )

@@ -14,10 +14,12 @@
 import { combineReducers } from 'redux'
 import auth from './auth'
 import post from './post'
+import posts from './posts'
 
 const rootReducer = combineReducers({
   auth,
   post,
+  posts
 })
 
 export default rootReducer

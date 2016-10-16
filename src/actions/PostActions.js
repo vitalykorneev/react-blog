@@ -4,6 +4,26 @@ import { browserHistory } from 'react-router'
 
 import apiCall from '../utils/apiCall'
 
+export function getPosts() {
+  return (dispatch, getState) => {
+      apiCall({
+        method: 'GET',
+        path: '/post'
+      })
+      .then(res => {
+        console.log('res');
+        console.log(res.data);
+        
+        dispatch({
+          type: actionTypes.GET_POSTS,
+          posts: res.data
+        })
+      })
+      .catch(res => {
+        
+      })
+  }
+}
 export function addPost() {
   return (dispatch, getState) => {
     // dispatch({ type: actionTypes.ADD_POST })
@@ -65,6 +85,7 @@ export function addPost() {
       })
   }
 }
+
 export function updatePostFileds(data) {
   return (dispatch, getState) => {
 
