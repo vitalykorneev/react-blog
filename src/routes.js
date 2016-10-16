@@ -6,6 +6,7 @@ import {
   App,
   LoginPage,
   Posts,
+  PostCreate
 } from './containers'
 
 export default (authAgent) => {
@@ -28,7 +29,11 @@ export default (authAgent) => {
   return (
     <Route path="/" component={App}>
       <IndexRoute component={LoginPage} onEnter={checkAuth} />
-      <Route path="posts" component={Posts} onEnter={checkAuth} />
+      <Route path="posts" component={Posts} onEnter={checkAuth}>
+      </Route>
+      <Route path="post" onEnter={checkAuth}>
+        <Route path="create" component={PostCreate} onEnter={checkAuth} />
+      </Route>
     </Route>
   )
 }

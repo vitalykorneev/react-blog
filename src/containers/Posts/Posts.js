@@ -1,22 +1,20 @@
-  /*
- * LoginPage
- *
- * Users login on this page
- * Route: /
- *
- */
-
 import React, { Component } from 'react'
 import { PropTypes as Type } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import CSSModules from 'react-css-modules'
 import styles from './Posts.css'
+
+import { 
+  AdminPanel, 
+  // PostsList 
+} from '../../components'
 
 @connect(state => ({
   data: state.auth
 }))
 
+@CSSModules(styles, {allowMultiple: true})
 export default class Posts extends Component {
   static propTypes = {
   };
@@ -28,8 +26,10 @@ export default class Posts extends Component {
     const { data, dispatch } = this.props
 
     return (
-      <div>
-        posts!
+      <div styleName='root'>
+        <AdminPanel 
+          current='0'
+        />
       </div>
     )
   }

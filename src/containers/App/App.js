@@ -14,7 +14,10 @@ import { bindActionCreators} from 'redux'
 import ProjectRawTheme from '../../theme/material_ui_raw_theme'
 import { getMuiTheme } from 'material-ui/styles'
 import * as actions from '../../actions'
+import CSSModules from 'react-css-modules'
+import styles from './App.css'
 
+@CSSModules(styles, {allowMultiple: true})
 class App extends Component {
   static get childContextTypes() {
     return { muiTheme: React.PropTypes.object }
@@ -26,7 +29,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
+      <div styleName="app">
         { this.props.children }
       </div>
     )

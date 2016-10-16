@@ -4,8 +4,8 @@ const initialState = {
   type: null,
   user: {
     email: '',
-    firstName: '',
-    lastName: ''
+    name: '',
+    id: ''
   },
   isLoading: false,
   errors: null,

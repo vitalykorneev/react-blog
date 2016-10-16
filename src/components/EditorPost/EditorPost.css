@@ -1,0 +1,12 @@
+.root {
+  display: block;
+  border: 1px solid #f00;
+  width: 300px;
+  padding: 20px 0;
+}
+.button {
+  display: flex;
+}
+.buttons {
+  display: block;
+}

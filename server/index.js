@@ -52,7 +52,7 @@ const HTML = `
   <html lang="en">
     <head>
       <title>Blog</title>
-      <meta charset="utf-8">
+      <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <style>body { margin: 0; padding: 0; min-height: 100%; font-family: system, -apple-system, Helvetica, Arial, sans-serif; background: #fff; }</style>
       <link rel="manifest" href="/favicons/dest/manifest.json?v=gAA7bEArbx">

@@ -1,0 +1,32 @@
+.root {
+  width: 60px;
+  min-height: 500px;
+  height: 100%;
+  background: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+}
+.logo {
+  height: 60px;
+  display: flex;
+  width: 100%;
+  
+  &-text {
+    margin: auto;
+    font-weight: 700;
+    font-size: 30px;
+  }
+}
+.user {
+  height: 60px;
+  display: flex;
+  width: 100%;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
