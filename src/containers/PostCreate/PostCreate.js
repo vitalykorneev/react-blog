@@ -7,6 +7,8 @@ import styles from './PostCreate.css'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { PostActions } from '../../actions'
+import _ from 'lodash'
+import Snackbar from 'material-ui/Snackbar';
 
 import { 
   AdminPanel
@@ -14,6 +16,7 @@ import {
 
 
 @connect(state => ({
+  posts: state.posts,
   post: state.post
 }), dispatch => ({
   postActions: bindActionCreators(PostActions, dispatch)
@@ -26,6 +29,19 @@ export default class PostCreate extends Component {
 
   constructor(props, context) {
     super(props, context)
+    this.state = {
+      snackbarOpen: false
+    }
+  }
+
+  componentWillMount() {
+    const { routeParams } = this.props
+    if (routeParams.id) {
+      const post = _.find(this.props.posts.posts, { id: parseInt(routeParams.id, 10)})
+      this.props.postActions.updatePostFileds( post )
+    } else {
+      this.props.postActions.clearePostFileds()
+    }
   }
 
   _onChange(e, value) {
@@ -36,12 +52,30 @@ export default class PostCreate extends Component {
   }
 
   _onSubmit() {
-    this.props.postActions.addPost();
+    const { routeParams } = this.props
+    
+    if (routeParams.id) {
+      this.props.postActions.updatePost(routeParams.id);
+    } else {
+      this.props.postActions.addPost();
+    }
+    this._handleRequestOpen();
+  }
+
+  _handleRequestClose() {
+    this.setState({ snackbarOpen: false })
+  }
+  _handleRequestOpen() {
+    this.setState({ snackbarOpen: true })
   }
 
   render() {
 
+    const { routeParams } = this.props
     const { title, content } = this.props.post
+    const titlePage = routeParams.id ? 'Изменение поста' : 'Создание поста'
+    const titleButton = routeParams.id ? 'Изменить' : 'Создать'
+    const snackbarMeggage = routeParams.id ? 'Пост изменен' : 'Пост создан'
 
     return (
       <div styleName='root'>
@@ -50,7 +84,7 @@ export default class PostCreate extends Component {
         />  
         <div styleName='add'>
           <div styleName='add-title'>
-            Создание поста
+            {titlePage}
           </div>
           <div styleName='editor'>
             <div styleName='title'>
@@ -76,12 +110,18 @@ export default class PostCreate extends Component {
               />
             </div>
             <RaisedButton 
-              label="Создать" 
+              label={titleButton}
               primary={true} 
               onClick={this._onSubmit.bind(this)}
             />
           </div>
         </div> 
+        <Snackbar
+          open={this.state.snackbarOpen}
+          message={snackbarMeggage}
+          autoHideDuration={4000}
+          onRequestClose={this._handleRequestClose.bind(this)}
+        />
       </div>
     )
   }

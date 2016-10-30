@@ -13,6 +13,11 @@ export default function posts(state = initialState, action) {
         ...state,
         posts
       }
+    case actionTypes.DELETE_POST:
+      return {
+        ...state,
+        posts
+      }
 
     default:
       return state

@@ -46,13 +46,13 @@ export default class AdminPanel extends Component {
         </div>
         <div styleName='nav'>
           <IconButton
-            containerElement={<Link to="/posts" />}
+            containerElement={<Link to="/admin/posts" />}
             linkButton={true}
           >
             <ActionReorder color={current === '0' ? blue500 : black500} />
           </IconButton>
           <IconButton
-            containerElement={<Link to="/post/create" />}
+            containerElement={<Link to="/admin/post/create" />}
             linkButton={true}
           >
             <EditorEdit color={current === '1' ? blue500 : black500} />

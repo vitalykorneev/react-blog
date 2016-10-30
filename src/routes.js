@@ -15,24 +15,25 @@ export default (authAgent) => {
     if (authAgent.isLoggedIn()) {
       // Redirect from / to /campaigns when user is logged in
       if (nextState.location.pathname === '/') {
-        replace('/posts')
+        replace('/admin/posts')
         console.log('already logged in :)')
       }
     } else {
       if (nextState.location.pathname !== '/') {
-        replace('/')
+        replace('/admin')
       }
       console.log('not logged yet :(')
     }
   }
 
   return (
-    <Route path="/" component={App}>
+    <Route path="admin" component={App}>
       <IndexRoute component={LoginPage} onEnter={checkAuth} />
       <Route path="posts" component={Posts} onEnter={checkAuth}>
       </Route>
       <Route path="post" onEnter={checkAuth}>
         <Route path="create" component={PostCreate} onEnter={checkAuth} />
+        <Route path=":id/edit" component={PostCreate} onEnter={checkAuth} />
       </Route>
     </Route>
   )

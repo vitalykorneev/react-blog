@@ -31,7 +31,7 @@ export default class Posts extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, postActions } = this.props
 
     return (
       <div styleName='root'>
@@ -40,6 +40,7 @@ export default class Posts extends Component {
         />
         <PostsList
           posts={posts.posts}
+          actions={postActions}
         />
       </div>
     )

@@ -24,7 +24,6 @@ export default class PostsList extends Component {
 
 
   render() {
-
     const { posts } = this.props
 
     return (
@@ -33,9 +32,11 @@ export default class PostsList extends Component {
           posts.map((post, key) => (
             <Post 
               key={key}
+              id={post.id}
               date={post.updatedAt}
               title={post.title}
               content={post.content}
+              deletePost={this.props.actions.deletePost}
             />
           ))
         }

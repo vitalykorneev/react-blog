@@ -1,6 +1,7 @@
 import * as actionTypes from '../constants/PostConstants'
 import genSalt from '../utils/salt'
 import { browserHistory } from 'react-router'
+import _ from 'lodash'
 
 import apiCall from '../utils/apiCall'
 
@@ -24,15 +25,13 @@ export function getPosts() {
       })
   }
 }
+
 export function addPost() {
   return (dispatch, getState) => {
-    // dispatch({ type: actionTypes.ADD_POST })
 
     const state =  getState()
     let { post } = state
     post = Object.assign({}, post, { id: 1 })
-
-    console.log(post);
 
       apiCall({
         method: 'POST',
@@ -40,45 +39,7 @@ export function addPost() {
         data: post
       })
       .then(res => {
-        console.log('res');
-        console.log(res);
-
-        if (!res.data.user) {
-
-          dispatch({
-            type: actionTypes.AUTH_LOGIN_FAILED,
-            errors: {
-              code: res.status,
-              data: res.data
-            }
-          })
-
-          return
-        }
-
-        const user = {
-          email: res.data.user.email,
-          name: res.data.user.name
-        }
-        const token = res.data.access_token
-
-        authAgent.login(user, token, {
-          sessionOnly: !data.rememberMe,
-          cb: () => {
-            dispatch({
-              type: actionTypes.AUTH_LOGIN_SUCCEED,
-              user
-            })
-
-            forwardTo('/posts')
-          }
-        })
-
-        // Reset form
-        dispatch(changeForm({
-          email: '',
-          password: ''
-        }))
+        dispatch(clearePostFileds());
       })
       .catch(res => {
         
@@ -86,6 +47,64 @@ export function addPost() {
   }
 }
 
+export function updatePost(id) {
+  return (dispatch, getState) => {
+
+    const state =  getState()
+    let { post } = state
+
+      apiCall({
+        method: 'PUT',
+        path: `/post/${id}`,
+        data: post
+      })
+      .then(res => {
+        // dispatch(clearePostFileds());
+      })
+      .catch(res => {
+        
+      })
+  }
+}
+
+export function deletePost(post) {
+  return (dispatch, getState) => {
+
+    const state =  getState()
+    const postsOld = state.posts.posts
+    let posts = [].concat([], postsOld);
+
+    let deletedPostId = 0;
+    
+    const deletedPost = _.find(posts, function(_post, _id) {
+      deletedPostId = _id
+      return _post.id === post.id; 
+    })
+
+    posts.splice(deletedPostId, 1)
+
+    dispatch({ type: actionTypes.DELETE_POST, posts })
+
+    apiCall({
+      method: 'DELETE',
+      path: '/post',
+      data: post
+    })
+    .then(res => {
+
+    })
+    .catch(res => {
+      
+    })
+  }
+}
+
+export function clearePostFileds() {
+  return (dispatch, getState) => {
+
+    dispatch({ type: actionTypes.CLEARE_POST_FILEDS })
+  }
+}
 export function updatePostFileds(data) {
   return (dispatch, getState) => {
 

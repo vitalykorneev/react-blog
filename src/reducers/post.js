@@ -7,7 +7,6 @@ const initialState = {
 
 export default function post(state = initialState, action) {
   const { type, data } = action
-  const key = data ? Object.keys(data)[0] : ''
 
   switch (type) {
     case actionTypes.ADD_POST:
@@ -15,7 +14,14 @@ export default function post(state = initialState, action) {
     case actionTypes.UPDATE_POST_FILEDS:
       return {
         ...state,
-        [key]: data[key]
+        title: data.title || state.title,
+        content: data.content || state.content
+      }
+    case actionTypes.CLEARE_POST_FILEDS:
+      return {
+        ...state,
+        title: '',
+        content: ''
       }
 
     default:

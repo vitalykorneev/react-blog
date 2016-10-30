@@ -2,6 +2,10 @@
   display: block;
   max-width: 500px;
   padding: 20px;
+  margin: 0px 15px;
+  margin-bottom: 30px;
+  background: #FFF;
+  flex-grow: 1;
   
   box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
 }
@@ -19,4 +23,9 @@
 .content {
   font-size: 16px;
   line-height: 1.5;
+}
+.controls {
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
